@@ -1,19 +1,19 @@
-import { Playlist } from 'src/songs/entities';
+import { User } from 'src/auth/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity({
-  name: 'user',
-  comment: 'USERS TABLE',
+  name: 'playlist',
+  comment: 'PALYLISTS TABLE',
 })
-export class User {
+export class Playlist {
   @PrimaryGeneratedColumn('uuid')
-  user_id!: string;
+  playlist_id!: string;
 
   @Column({
     type: 'varchar',
@@ -24,17 +24,10 @@ export class User {
 
   @Column({
     type: 'varchar',
-    length: 48,
-    nullable: false,
+    length: 255,
+    nullable: true,
   })
-  email!: string;
-
-  @Column({
-    type: 'varchar',
-    length: 64,
-    nullable: false,
-  })
-  password!: string;
+  description?: string;
 
   @Column({
     type: 'varchar',
@@ -43,8 +36,8 @@ export class User {
   })
   image_url?: string;
 
-  @OneToMany(() => Playlist, (playlist) => playlist.user)
-  playlists!: Playlist[];
+  @ManyToOne(() => User, (user) => user.playlists)
+  user!: User;
 
   @Column({
     default: true,

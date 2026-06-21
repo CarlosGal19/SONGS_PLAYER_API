@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
+import { SongsModule } from './songs/songs.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: process.env.NODE_ENV === 'development',
     }),
+    AuthModule,
+    SongsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

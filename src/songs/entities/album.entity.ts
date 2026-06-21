@@ -1,50 +1,47 @@
-import { Playlist } from 'src/songs/entities';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Artist } from './artist.entity';
+import { Song } from './song.entity';
 
 @Entity({
-  name: 'user',
-  comment: 'USERS TABLE',
+  name: 'album',
+  comment: 'ALBUMS TABLE',
 })
-export class User {
+export class Album {
   @PrimaryGeneratedColumn('uuid')
-  user_id!: string;
+  album_id!: string;
 
   @Column({
     type: 'varchar',
-    length: 64,
+    length: 96,
     nullable: false,
   })
   name!: string;
 
-  @Column({
-    type: 'varchar',
-    length: 48,
-    nullable: false,
-  })
-  email!: string;
+  @ManyToOne(() => Artist, (artist) => artist.albums)
+  artist!: Artist;
+
+  @OneToMany(() => Song, (song) => song.album)
+  songs!: Song[];
 
   @Column({
     type: 'varchar',
     length: 64,
     nullable: false,
   })
-  password!: string;
+  image_url!: string;
 
   @Column({
-    type: 'varchar',
-    length: 64,
-    nullable: true,
+    type: 'timestamp',
+    nullable: false,
   })
-  image_url?: string;
-
-  @OneToMany(() => Playlist, (playlist) => playlist.user)
-  playlists!: Playlist[];
+  released_at!: Date;
 
   @Column({
     default: true,

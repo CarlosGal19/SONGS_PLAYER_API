@@ -1,4 +1,3 @@
-import { Playlist } from 'src/songs/entities';
 import {
   Column,
   CreateDateColumn,
@@ -6,45 +5,36 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Album } from './album.entity';
+import { Song } from './song.entity';
 
 @Entity({
-  name: 'user',
-  comment: 'USERS TABLE',
+  name: 'artist',
+  comment: 'ARTISTS TABLE',
 })
-export class User {
+export class Artist {
   @PrimaryGeneratedColumn('uuid')
-  user_id!: string;
-
-  @Column({
-    type: 'varchar',
-    length: 64,
-    nullable: false,
-  })
-  name!: string;
+  artist_id!: string;
 
   @Column({
     type: 'varchar',
     length: 48,
     nullable: false,
   })
-  email!: string;
+  name!: string;
 
   @Column({
     type: 'varchar',
     length: 64,
     nullable: false,
   })
-  password!: string;
+  image_url!: string;
 
-  @Column({
-    type: 'varchar',
-    length: 64,
-    nullable: true,
-  })
-  image_url?: string;
+  @OneToMany(() => Album, (album) => album.artist)
+  albums!: Album[];
 
-  @OneToMany(() => Playlist, (playlist) => playlist.user)
-  playlists!: Playlist[];
+  @OneToMany(() => Song, (song) => song.artist)
+  songs!: Song[];
 
   @Column({
     default: true,
