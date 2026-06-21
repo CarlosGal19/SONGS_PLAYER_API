@@ -4,8 +4,10 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { PlaylistSongs } from './playlist_songs.entity';
 
 @Entity({
   name: 'playlist',
@@ -52,4 +54,7 @@ export class Playlist {
     nullable: false,
   })
   created_at!: Date;
+
+  @OneToMany(() => PlaylistSongs, (playlistSong) => playlistSong.playlist)
+  playlist_songs!: PlaylistSongs[];
 }

@@ -2,7 +2,15 @@ import { Module } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { SongsController } from './songs.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Album, Artist, Genre, LikedSongs, Playlist, Song } from './entities';
+import {
+  Album,
+  Artist,
+  Genre,
+  LikedSongs,
+  Playlist,
+  PlaylistSongs,
+  Song,
+} from './entities';
 
 @Module({
   imports: [
@@ -12,6 +20,7 @@ import { Album, Artist, Genre, LikedSongs, Playlist, Song } from './entities';
       Genre,
       LikedSongs,
       Playlist,
+      PlaylistSongs,
       Song,
     ]),
   ],
