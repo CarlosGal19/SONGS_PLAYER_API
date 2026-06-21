@@ -1,0 +1,11 @@
+services:
+  songs_player_pg_db:
+    image: postgres:18.4-alpine3.24
+    container_name: songs_player_pg_db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres:/var/lib/songs_player_pg_db/data
