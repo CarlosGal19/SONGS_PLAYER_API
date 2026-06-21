@@ -1,4 +1,5 @@
 import { Playlist } from 'src/songs/entities';
+import { LikedSongs } from 'src/songs/entities/liked_songs.entity';
 import {
   Column,
   CreateDateColumn,
@@ -59,4 +60,7 @@ export class User {
     nullable: false,
   })
   created_at!: Date;
+
+  @OneToMany(() => LikedSongs, (likedSong) => likedSong.user)
+  liked_songs!: LikedSongs[];
 }

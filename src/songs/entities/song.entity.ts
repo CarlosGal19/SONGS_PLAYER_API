@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Artist } from './artist.entity';
 import { Genre } from './genre.entity';
 import { Album } from './album.entity';
+import { LikedSongs } from './liked_songs.entity';
 
 @Entity({
   name: 'song',
@@ -65,4 +67,7 @@ export class Song {
     nullable: false,
   })
   created_at!: Date;
+
+  @OneToMany(() => LikedSongs, (likedSong) => likedSong.song)
+  liked_songs!: LikedSongs[];
 }
