@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { SongsModule } from './songs/songs.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { SongsModule } from './songs/songs.module';
     }),
     AuthModule,
     SongsModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
